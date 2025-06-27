@@ -134,7 +134,7 @@
                         <h2 class="fw-bold mb-1">{{ Auth::user()->name }}</h2>
                         <p class="text-muted">{{ Auth::user()->email }}</p>
                     </div>
-                    <a href="{{ route('auth.edit-profile') }}" class="btn btn-outline-primary">
+                    <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary">
                         <i class="fas fa-edit me-2"></i>Edit Profil
                     </a>
                 </div>
@@ -256,7 +256,7 @@
             @else
                 <div class="empty-state">
                     <i class="fas fa-heart empty-icon"></i>
-                    <h4>Belum Ada Lukisan Favorit</h4>
+                    <h4>Belum Ada Lukisan Disukai</h4>
                     <p class="text-muted">Anda belum menyukai lukisan apapun.</p>
                     <a href="{{ route('paintings.index') }}" class="btn btn-primary mt-3">
                         <i class="fas fa-search me-2"></i>Jelajahi Lukisan
