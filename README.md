@@ -1,75 +1,150 @@
 # Romyverse (Artoverse)
 
-Platform berbagi dan eksplorasi karya seni digital berbasis web. Romyverse adalah tempat seniman dapat memamerkan karya mereka dan penggemar seni dapat menemukan dan berinteraksi dengan lukisan-lukisan menarik.
+![Romyverse Banner](public/images/logo.png)
 
-## Fitur
+Romyverse adalah platform berbagi dan eksplorasi karya seni digital berbasis web. Platform ini memungkinkan seniman untuk memamerkan karya mereka dan penggemar seni dapat menemukan, menyukai, dan berinteraksi dengan lukisan-lukisan menarik dalam pengalaman visual yang menarik dengan layout Pinterest-style.
 
-- **Galeri Lukisan Pinterest-Style**: Tampilan galeri yang menarik dengan layout pinterest
-- **Autentikasi User & Admin**: Sistem login dan registrasi yang aman
-- **Upload Karya**: Kemudahan dalam mengunggah dan mengedit karya
-- **Interaksi Sosial**: Fitur like dan komentar untuk berinteraksi dengan karya
+## ✨ Fitur Utama
+
+### 1. Manajemen Karya Seni
+- **Upload & Edit Karya**: Kemudahan dalam mengunggah dan mengelola karya seni dengan deskripsi
+- **Galeri Lukisan Pinterest-Style**: Tampilan galeri yang menarik dengan layout dinamis
+- **Detail Karya**: Halaman detail untuk setiap karya dengan informasi lengkap
+
+### 2. Interaksi Sosial
+- **Sistem Like/Favorit**: Menyimpan dan menandai karya favorit
+- **Sistem Komentar**: Diskusi dan feedback untuk setiap karya seni
 - **Profil Publik**: Halaman profil untuk melihat semua karya seniman
-- **Sistem Notifikasi**: Dapatkan notifikasi saat karya Anda mendapat interaksi
-- **Pencarian**: Cari lukisan berdasarkan judul, seniman, atau tahun
-- **Koleksi Favorit**: Simpan lukisan favorit dalam koleksi pribadi
-- **Panel Admin**: Manajemen pengguna dan konten bagi administrator
+- **Sistem Notifikasi**: Pemberitahuan saat karya mendapat like atau komentar
 
-## Teknologi
+### 3. Fitur Navigasi & Pencarian
+- **Pencarian**: Mencari lukisan berdasarkan judul, seniman, atau tahun
+- **Filter & Kategori**: Pengelompokan karya berdasarkan kategori
 
-- **Backend**: Laravel 12
+### 4. Manajemen Pengguna
+- **Autentikasi User & Admin**: Sistem login dan registrasi yang aman
+- **Panel Admin**: Manajemen pengguna dan konten
+- **Pengelolaan Profil**: Update informasi profil dan foto
+
+## 🛠️ Teknologi
+
+- **Backend**: Laravel 12.x
 - **Frontend**: HTML, CSS, JavaScript, Bootstrap 5
 - **Database**: MySQL
-- **Libraries**: Swiper, FontAwesome, AOS Animation
+- **Libraries**:
+  - Swiper (carousel)
+  - Font Awesome (ikon)
+  - AOS Animation (animasi scroll)
+  - ImagesLoaded (manajemen loading gambar)
 
-## Instalasi
+## 🚀 Instalasi
 
-1. Clone repository:
+### Prasyarat
+- PHP 8.1+ dan Composer
+- MySQL 5.7+
+- Node.js dan NPM (opsional untuk assets)
+
+### Langkah Instalasi
+
+1. **Clone repository**:
    ```
-   git clone https://github.com/USERNAME/romyverse.git
+   git clone https://github.com/Romyyzhh/romyverse.git
    cd romyverse
    ```
 
-2. Install dependencies:
+2. **Install dependencies**:
    ```
    composer install
    ```
 
-3. Setup environment:
+3. **Setup environment**:
    ```
    cp .env.example .env
    php artisan key:generate
    ```
 
-4. Konfigurasi database di file .env
+4. **Konfigurasi database**:
+   - Buat database MySQL
+   - Update konfigurasi database di file .env:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=romyverse
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-5. Jalankan migrasi:
+5. **Jalankan migrasi dan seeder**:
    ```
    php artisan migrate
-   ```
-
-6. Opsional, seed database:
-   ```
    php artisan db:seed
    ```
 
-7. Buat symlink untuk storage:
+6. **Buat symlink untuk storage**:
    ```
    php artisan storage:link
    ```
 
-8. Jalankan aplikasi:
+7. **Jalankan aplikasi**:
    ```
    php artisan serve
    ```
 
-## Lisensi
+8. **Akses aplikasi** di browser: [http://localhost:8000](http://localhost:8000)
+
+## 👤 Akun Demo
+
+### Admin
+- Email: admin@example.com
+- Password: password
+
+### User
+- Email: user@example.com
+- Password: password
+
+## 📸 Screenshot
+
+### Halaman Beranda
+![Halaman Beranda](public/screenshots/home.jpg)
+
+### Halaman Detail Karya
+![Detail Karya](public/screenshots/detail.jpg)
+
+### Halaman Profil
+![Profil User](public/screenshots/profile.jpg)
+
+### Panel Admin
+![Panel Admin](public/screenshots/admin.jpg)
+
+## 🌟 Fitur Mendatang
+
+Berikut adalah rencana pengembangan fitur Romyverse di masa mendatang:
+
+- **Kategori/Tag lukisan** - Implementasi sistem kategori atau tag untuk memudahkan navigasi
+- **Section trending/populer** - Menampilkan lukisan dengan interaksi tertinggi
+- **Filter dan pengurutan** - Opsi filter berdasarkan tanggal, popularitas, artis
+- **Integrasi media sosial** - Pembagian karya ke platform sosial media
+- **Sistem follow** - Mengikuti seniman favorit dan melihat update karya terbaru mereka
+
+## 🤝 Kontribusi
+
+Kontribusi selalu disambut! Jika Anda ingin berkontribusi:
+
+1. Fork repository
+2. Buat branch fitur (`git checkout -b feature/amazing-feature`)
+3. Commit perubahan (`git commit -m 'Add some amazing feature'`)
+4. Push ke branch (`git push origin feature/amazing-feature`)
+5. Buka Pull Request
+
+## 📄 Lisensi
 
 Romyverse dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
 
-## Kontributor
+## 👨‍💻 Pengembang
 
-- Creator: Romyverse Team
+- **Romyverse Team** - [GitHub](https://github.com/Romyyzhh)
 
-## Screenshots
+---
 
-[Screenshots akan ditambahkan di sini]
+&copy; 2023 Romyverse. All Rights Reserved.
