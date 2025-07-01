@@ -107,16 +107,16 @@ Romyverse adalah platform berbagi dan eksplorasi karya seni digital berbasis web
 ## 📸 Screenshot
 
 ### Halaman Beranda
-![Halaman Beranda](public/screenshots/home.jpg)
+![Halaman Beranda](public/screenshots/home.PNG)
 
 ### Halaman Detail Karya
-![Detail Karya](public/screenshots/detail.jpg)
+![Detail Karya](public/screenshots/detail.PNG)
 
 ### Halaman Profil
-![Profil User](public/screenshots/profile.jpg)
+![Profil User](public/screenshots/profile.PNG)
 
 ### Panel Admin
-![Panel Admin](public/screenshots/admin.jpg)
+![Panel Admin](public/screenshots/admin.PNG)
 
 ## 🌟 Fitur Mendatang
 
