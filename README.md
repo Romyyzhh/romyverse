@@ -2,7 +2,7 @@
 
 ![Romyverse Banner](public/images/logo.png)
 
-Romyverse adalah platform berbagi dan eksplorasi karya seni digital berbasis web. Platform ini memungkinkan seniman untuk memamerkan karya mereka dan penggemar seni dapat menemukan, menyukai, dan berinteraksi dengan lukisan-lukisan menarik dalam pengalaman visual yang menarik dengan layout Pinterest-style.
+Artoverse adalah platform berbagi dan eksplorasi karya seni digital berbasis web. Platform ini memungkinkan seniman untuk memamerkan karya mereka dan penggemar seni dapat menemukan, menyukai, dan berinteraksi dengan lukisan-lukisan menarik dalam pengalaman visual yang menarik dengan layout Pinterest-style.
 
 ## ✨ Fitur Utama
 
