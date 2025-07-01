@@ -104,4 +104,38 @@ class User extends Authenticatable
         
         return asset('images/default-profile.jpg');
     }
+    
+    /**
+     * Get the users that are following this user.
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id')
+                    ->withTimestamps();
+    }
+    
+    /**
+     * Get the users that this user is following.
+     */
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id')
+                    ->withTimestamps();
+    }
+    
+    /**
+     * Check if the user is following another user.
+     */
+    public function isFollowing(User $user)
+    {
+        return $this->following()->where('following_id', $user->id)->exists();
+    }
+    
+    /**
+     * Check if the user is followed by another user.
+     */
+    public function isFollowedBy(User $user)
+    {
+        return $this->followers()->where('follower_id', $user->id)->exists();
+    }
 }

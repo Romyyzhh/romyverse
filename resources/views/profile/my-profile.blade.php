@@ -152,6 +152,14 @@
                         <div class="stat-value">{{ Auth::user()->likes()->count() }}</div>
                         <div class="stat-label">Favorit</div>
                     </div>
+                    <a href="{{ route('users.followers', Auth::id()) }}" class="stat-item text-decoration-none">
+                        <div class="stat-value">{{ Auth::user()->followers()->count() }}</div>
+                        <div class="stat-label">Pengikut</div>
+                    </a>
+                    <a href="{{ route('users.following', Auth::id()) }}" class="stat-item text-decoration-none">
+                        <div class="stat-value">{{ Auth::user()->following()->count() }}</div>
+                        <div class="stat-label">Mengikuti</div>
+                    </a>
                 </div>
                 
                 @if(Auth::user()->bio)
@@ -174,6 +182,11 @@
         <li class="nav-item">
             <a class="nav-link" id="liked-tab" data-bs-toggle="tab" href="#liked" role="tab">
                 <i class="fas fa-heart me-2"></i>Disukai
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="network-tab" data-bs-toggle="tab" href="#network" role="tab">
+                <i class="fas fa-user-friends me-2"></i>Jaringan
             </a>
         </li>
     </ul>
@@ -263,6 +276,82 @@
                     </a>
                 </div>
             @endif
+        </div>
+        
+        <div class="tab-pane fade" id="network" role="tabpanel">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Pengikut Saya</h5>
+                            <a href="{{ route('users.followers', Auth::id()) }}" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
+                        </div>
+                        <div class="card-body">
+                            @if(Auth::user()->followers()->count() > 0)
+                                <div class="list-group list-group-flush">
+                                    @foreach(Auth::user()->followers()->take(5)->get() as $follower)
+                                        <div class="list-group-item px-0 py-3 d-flex align-items-center">
+                                            <img src="{{ $follower->getProfilePictureUrlAttribute() }}" alt="{{ $follower->name }}" class="rounded-circle me-3" width="50" height="50" style="object-fit: cover;">
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0">{{ $follower->name }}</h6>
+                                                <small class="text-muted">{{ $follower->paintings()->count() }} karya</small>
+                                            </div>
+                                            <a href="{{ route('profile.public', $follower->id) }}" class="btn btn-sm btn-light">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="text-center py-4">
+                                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                                    <p>Anda belum memiliki pengikut.</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Saya Mengikuti</h5>
+                            <a href="{{ route('users.following', Auth::id()) }}" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
+                        </div>
+                        <div class="card-body">
+                            @if(Auth::user()->following()->count() > 0)
+                                <div class="list-group list-group-flush">
+                                    @foreach(Auth::user()->following()->take(5)->get() as $following)
+                                        <div class="list-group-item px-0 py-3 d-flex align-items-center">
+                                            <img src="{{ $following->getProfilePictureUrlAttribute() }}" alt="{{ $following->name }}" class="rounded-circle me-3" width="50" height="50" style="object-fit: cover;">
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0">{{ $following->name }}</h6>
+                                                <small class="text-muted">{{ $following->paintings()->count() }} karya</small>
+                                            </div>
+                                            <div class="d-flex">
+                                                <a href="{{ route('profile.public', $following->id) }}" class="btn btn-sm btn-light me-2">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <form action="{{ route('users.follow', $following->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-secondary">
+                                                        <i class="fas fa-user-minus"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="text-center py-4">
+                                    <i class="fas fa-user-friends fa-3x text-muted mb-3"></i>
+                                    <p>Anda belum mengikuti siapapun.</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\FollowController;
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
@@ -61,6 +62,11 @@ Route::middleware('auth')->group(function () {
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile');
     Route::get('/profile/{id}', [ProfileController::class, 'publicProfile'])->name('profile.public');
+    
+    // Follow routes
+    Route::post('/users/{user}/follow', [FollowController::class, 'toggle'])->name('users.follow');
+    Route::get('/users/{user}/followers', [FollowController::class, 'followers'])->name('users.followers');
+    Route::get('/users/{user}/following', [FollowController::class, 'following'])->name('users.following');
     
     // Notification routes
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

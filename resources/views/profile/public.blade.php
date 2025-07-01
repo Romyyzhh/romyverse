@@ -115,6 +115,18 @@
                         <h2 class="fw-bold mb-1">{{ $user->name }}</h2>
                         <p class="text-muted">Anggota sejak {{ $user->created_at->format('M Y') }}</p>
                     </div>
+                    
+                    @auth
+                        @if(Auth::id() != $user->id)
+                            <form action="{{ route('users.follow', $user->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn {{ Auth::user()->isFollowing($user) ? 'btn-secondary' : 'btn-primary' }}">
+                                    <i class="fas {{ Auth::user()->isFollowing($user) ? 'fa-user-minus' : 'fa-user-plus' }} me-2"></i>
+                                    {{ Auth::user()->isFollowing($user) ? 'Berhenti Mengikuti' : 'Ikuti' }}
+                                </button>
+                            </form>
+                        @endif
+                    @endauth
                 </div>
                 
                 <div class="profile-stats">
@@ -126,6 +138,14 @@
                         <div class="stat-value">{{ $totalLikes }}</div>
                         <div class="stat-label">Total Likes</div>
                     </div>
+                    <a href="{{ route('users.followers', $user->id) }}" class="stat-item text-decoration-none">
+                        <div class="stat-value">{{ $user->followers()->count() }}</div>
+                        <div class="stat-label">Pengikut</div>
+                    </a>
+                    <a href="{{ route('users.following', $user->id) }}" class="stat-item text-decoration-none">
+                        <div class="stat-value">{{ $user->following()->count() }}</div>
+                        <div class="stat-label">Mengikuti</div>
+                    </a>
                 </div>
                 
                 @if($user->bio)
