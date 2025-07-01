@@ -14,6 +14,7 @@ Romyverse adalah platform berbagi dan eksplorasi karya seni digital berbasis web
 ### 2. Interaksi Sosial
 - **Sistem Like/Favorit**: Menyimpan dan menandai karya favorit
 - **Sistem Komentar**: Diskusi dan feedback untuk setiap karya seni
+- **Sistem Follow**: Mengikuti seniman favorit dan melihat update karya terbaru mereka
 - **Profil Publik**: Halaman profil untuk melihat semua karya seniman
 - **Sistem Notifikasi**: Pemberitahuan saat karya mendapat like atau komentar
 
@@ -24,7 +25,7 @@ Romyverse adalah platform berbagi dan eksplorasi karya seni digital berbasis web
 ### 4. Manajemen Pengguna
 - **Autentikasi User & Admin**: Sistem login dan registrasi yang aman
 - **Panel Admin**: Manajemen pengguna dan konten
-- **Pengelolaan Profil**: Update informasi profil dan foto
+- **Pengelolaan Profil**: Update informasi profil dan foto profil
 
 ## 🛠️ Teknologi
 
@@ -125,7 +126,7 @@ Berikut adalah rencana pengembangan fitur Romyverse di masa mendatang:
 - **Section trending/populer** - Menampilkan lukisan dengan interaksi tertinggi
 - **Filter dan pengurutan** - Opsi filter berdasarkan tanggal, popularitas, artis
 - **Integrasi media sosial** - Pembagian karya ke platform sosial media
-- **Sistem follow** - Mengikuti seniman favorit dan melihat update karya terbaru mereka
+- **Sistem pesan langsung** - Komunikasi antar pengguna melalui sistem pesan pribadi
 
 ## 🤝 Kontribusi
 
@@ -147,4 +148,4 @@ Romyverse dilisensikan di bawah [MIT License](https://opensource.org/licenses/MI
 
 ---
 
-&copy; 2023 Romyverse. All Rights Reserved.
+&copy; 2023-2025 Romyverse. All Rights Reserved.
