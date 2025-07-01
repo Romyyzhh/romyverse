@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PaintingController extends Controller
 {
@@ -226,5 +227,21 @@ class PaintingController extends Controller
             return redirect()->back()
                 ->withErrors(['general' => 'Gagal menghapus lukisan: ' . $e->getMessage()]);
         }
+    }
+
+    /**
+     * Export painting to PDF
+     *
+     * @param  \App\Models\Painting  $painting
+     * @return \Illuminate\Http\Response
+     */
+    public function exportPdf(Painting $painting)
+    {
+        // Authorize view access
+        $this->authorize('view', $painting);
+        
+        $pdf = PDF::loadView('paintings.pdf', compact('painting'));
+        
+        return $pdf->download($painting->title . '.pdf');
     }
 }

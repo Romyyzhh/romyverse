@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', function () { return redirect()->route('paintings.index'); });
 Route::get('/paintings', [PaintingController::class, 'index'])->name('paintings.index');
 Route::get('/paintings/{painting}', [PaintingController::class, 'show'])->name('paintings.show');
+Route::get('/paintings/{painting}/pdf', [PaintingController::class, 'exportPdf'])->name('paintings.pdf');
 
 Route::get('/debug-paintings', function () {
     $paintings = DB::table('paintings')->get();

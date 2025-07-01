@@ -60,6 +60,10 @@
                                         <i class="fas fa-arrow-left me-2"></i>Kembali
                                     </a>
                                     <div class="d-flex">
+                                        <a href="{{ route('paintings.pdf', $painting->id) }}" class="btn btn-outline-secondary me-2" target="_blank">
+                                            <i class="fas fa-file-pdf me-1"></i> Export PDF
+                                        </a>
+                                        
                                         @auth
                                         <form action="{{ route('paintings.like', $painting->id) }}" method="POST" class="me-2">
                                             @csrf
