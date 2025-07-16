@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Proyek Laravel - Romyverse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #2980b9;
+            margin-top: 25px;
+        }
+        h4 {
+            color: #16a085;
+            margin-top: 20px;
+        }
+        code {
+            background-color: #f8f8f8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-left: 0;
+            color: #555;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+    <h1>LAPORAN PROYEK LARAVEL - ROMYVERSE</h1>
+
+    <h2>I. Link Repositori Proyek Laravel (40 poin)</h2>
+
+    <h3>1. Link GitHub Repositori</h3>
+
+    <p>Link GitHub repositori proyek Laravel Romyverse: <a href="https://github.com/Romyyzhh/romyverse">https://github.com/Romyyzhh/romyverse</a></p>
+
+    <p>Status repositori: <strong>Public</strong></p>
+
+    <p>File README.md telah disertakan dengan informasi berikut:</p>
+    <ul>
+        <li><strong>Nama proyek</strong>: Romyverse (Artoverse)</li>
+        <li><strong>Fitur utama</strong>:
+            <ul>
+                <li>Manajemen Karya Seni (Upload, Edit, Galeri Pinterest-Style)</li>
+                <li>Interaksi Sosial (Like, Komentar, Follow, Profil Publik, Notifikasi)</li>
+                <li>Navigasi & Pencarian</li>
+                <li>Manajemen Pengguna (Autentikasi, Panel Admin, Pengelolaan Profil)</li>
+            </ul>
+        </li>
+        <li><strong>Instruksi instalasi</strong>: Tersedia lengkap di README.md termasuk prasyarat, langkah instalasi, dan konfigurasi database</li>
+    </ul>
+
+    <h3>2. Screenshot Hasil Tampilan Aplikasi</h3>
+
+    <h4>Tampilan Halaman Login/Register</h4>
+    <img src="public/screenshots/login.PNG" alt="Halaman Login">
+    <img src="public/screenshots/register.PNG" alt="Halaman Register">
+
+    <h4>Tampilan Halaman Data CRUD</h4>
+    <img src="public/screenshots/crud_list.PNG" alt="Halaman CRUD Paintings">
+    <img src="public/screenshots/crud_create.PNG" alt="Form Tambah Painting">
+    <img src="public/screenshots/crud_edit.PNG" alt="Form Edit Painting">
+
+    <h4>Dashboard atau Beranda Setelah Login</h4>
+    <img src="public/screenshots/home.PNG" alt="Beranda Setelah Login">
+    <img src="public/screenshots/admin.PNG" alt="Dashboard Admin">
+
+    <div class="page-break"></div>
+
+    <h2>II. Fitur Minimal Wajib dalam Proyek (40 poin)</h2>
+
+    <h3>1. Fasilitas Login dan Register (10 poin)</h3>
+
+    <h4>Menggunakan Middleware Auth</h4>
+    <p>Aplikasi Romyverse mengimplementasikan middleware auth untuk melindungi halaman-halaman tertentu. Middleware ini diterapkan pada:</p>
+
+    <p><strong>Routes/web.php</strong>:</p>
+    <pre><code>Route::middleware(['auth'])->group(function () {
+    Route::resource('paintings', PaintingController::class)->except(['index', 'show']);
+    Route::post('/paintings/{painting}/like', [PaintingController::class, 'like'])->name('paintings.like');
+    Route::post('/paintings/{painting}/unlike', [PaintingController::class, 'unlike'])->name('paintings.unlike');
+    Route::post('/paintings/{painting}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
+    Route::post('/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');
+});</code></pre>
+
+    <p><strong>Middleware Admin</strong>:</p>
+    <pre><code>public function handle(Request $request, Closure $next)
+{
+    if (!auth()->check() || !auth()->user()->is_admin) {
+        abort(403, 'Unauthorized action.');
+    }
+    return $next($request);
+}</code></pre>
+
+    <h4>Memisahkan Tampilan Pengguna yang Sudah Login dan Belum Login</h4>
+
+    <p>Aplikasi memiliki tampilan yang berbeda untuk pengguna yang sudah login dan belum login:</p>
+
+    <ul>
+        <li><strong>Navbar untuk pengguna yang belum login</strong>:
+            <ul>
+                <li>Menampilkan tombol Login dan Register</li>
+                <li>Tidak menampilkan menu untuk fitur yang memerlukan autentikasi</li>
+            </ul>
+        </li>
+        <li><strong>Navbar untuk pengguna yang sudah login</strong>:
+            <ul>
+                <li>Menampilkan nama pengguna dan foto profil</li>
+                <li>Menampilkan menu dropdown dengan opsi profil dan logout</li>
+                <li>Menampilkan tombol untuk upload karya baru</li>
+                <li>Jika pengguna adalah admin, menampilkan link ke dashboard admin</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>Implementasi pada layout.blade.php:</p>
+    <pre><code>@if (Auth::check())
+    &lt;div class="dropdown"&gt;
+        &lt;a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"&gt;
+            &lt;img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('images/default-profile.jpg') }}" 
+                 class="rounded-circle me-2" width="30" height="30"&gt;
+            {{ Auth::user()->name }}
+        &lt;/a&gt;
+        &lt;ul class="dropdown-menu"&gt;
+            &lt;li&gt;&lt;a class="dropdown-item" href="{{ route('profile.edit') }}"&gt;Profil&lt;/a&gt;&lt;/li&gt;
+            @if (Auth::user()->is_admin)
+                &lt;li&gt;&lt;a class="dropdown-item" href="{{ route('admin.dashboard') }}"&gt;Admin Dashboard&lt;/a&gt;&lt;/li&gt;
+            @endif
+            &lt;li&gt;
+                &lt;form method="POST" action="{{ route('logout') }}"&gt;
+                    @csrf
+                    &lt;button type="submit" class="dropdown-item"&gt;Logout&lt;/button&gt;
+                &lt;/form&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+@else
+    &lt;a href="{{ route('login') }}" class="btn btn-outline-light me-2"&gt;Login&lt;/a&gt;
+    &lt;a href="{{ route('register') }}" class="btn btn-light"&gt;Register&lt;/a&gt;
+@endif</code></pre>
+
+    <div class="page-break"></div>
+
+    <h3>2. Operasi CRUD (Create, Read, Update, Delete) untuk Entitas Utama (30 poin)</h3>
+
+    <p>Aplikasi Romyverse mengimplementasikan operasi CRUD untuk entitas utama <strong>Paintings</strong> (Lukisan).</p>
+
+    <h4>CRUD Menggunakan Controller dan Resource Route</h4>
+
+    <p><strong>Resource Route di web.php</strong>:</p>
+    <pre><code>Route::resource('paintings', PaintingController::class);</code></pre>
+
+    <p><strong>PaintingController.php</strong>:</p>
+    <pre><code>class PaintingController extends Controller
+{
+    public function index()
+    {
+        $paintings = Painting::with('user')->latest()->get();
+        return view('paintings.index', compact('paintings'));
+    }
+
+    public function create()
+    {
+        return view('paintings.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $imagePath = $request->file('image')->store('paintings', 'public');
+        
+        Painting::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'artist' => auth()->user()->name,
+            'year' => date('Y'),
+            'image' => $imagePath,
+            'user_id' => auth()->id()
+        ]);
+
+        return redirect()->route('paintings.index')->with('success', 'Lukisan berhasil ditambahkan!');
+    }
+
+    public function show(Painting $painting)
+    {
+        $painting->load(['comments.user', 'user']);
+        return view('paintings.show', compact('painting'));
+    }
+
+    public function edit(Painting $painting)
+    {
+        $this->authorize('update', $painting);
+        return view('paintings.edit', compact('painting'));
+    }
+
+    public function update(Request $request, Painting $painting)
+    {
+        $this->authorize('update', $painting);
+        
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $data = [
+            'title' => $request->title,
+            'description' => $request->description,
+        ];
+
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($painting->image && Storage::disk('public')->exists($painting->image)) {
+                Storage::disk('public')->delete($painting->image);
+            }
+            
+            $imagePath = $request->file('image')->store('paintings', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        $painting->update($data);
+
+        return redirect()->route('paintings.show', $painting)->with('success', 'Lukisan berhasil diperbarui!');
+    }
+
+    public function destroy(Painting $painting)
+    {
+        $this->authorize('delete', $painting);
+        
+        // Hapus gambar dari storage
+        if ($painting->image && Storage::disk('public')->exists($painting->image)) {
+            Storage::disk('public')->delete($painting->image);
+        }
+        
+        $painting->delete();
+
+        return redirect()->route('paintings.index')->with('success', 'Lukisan berhasil dihapus!');
+    }
+}</code></pre>
+
+    <div class="page-break"></div>
+
+    <h4>Validasi Form di Sisi Server (Backend)</h4>
+
+    <p>Validasi form diterapkan pada method <code>store</code> dan <code>update</code> di PaintingController:</p>
+
+    <p><strong>Validasi pada method store</strong>:</p>
+    <pre><code>$request->validate([
+    'title' => 'required|max:255',
+    'description' => 'required',
+    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+]);</code></pre>
+
+    <p><strong>Validasi pada method update</strong>:</p>
+    <pre><code>$request->validate([
+    'title' => 'required|max:255',
+    'description' => 'required',
+    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+]);</code></pre>
+
+    <p>Pesan error validasi ditampilkan pada form dengan kode berikut:</p>
+
+    <pre><code>@if ($errors->any())
+    &lt;div class="alert alert-danger"&gt;
+        &lt;ul&gt;
+            @foreach ($errors->all() as $error)
+                &lt;li&gt;{{ $error }}&lt;/li&gt;
+            @endforeach
+        &lt;/ul&gt;
+    &lt;/div&gt;
+@endif</code></pre>
+
+    <h2>III. Dokumentasi dan Uji Jalan Aplikasi (20 poin)</h2>
+
+    <h3>1. Penjelasan Ringkas</h3>
+
+    <h4>Struktur Folder Proyek</h4>
+
+    <p>Proyek Romyverse mengikuti struktur folder standar Laravel dengan beberapa penyesuaian:</p>
+
+    <ul>
+        <li><strong>app/</strong>
+            <ul>
+                <li><strong>Http/</strong>
+                    <ul>
+                        <li><strong>Controllers/</strong> - Berisi semua controller aplikasi (AuthController, PaintingController, CommentController, dll)</li>
+                        <li><strong>Middleware/</strong> - Berisi middleware kustom seperti AdminMiddleware</li>
+                        <li><strong>Requests/</strong> - Berisi form request validation</li>
+                    </ul>
+                </li>
+                <li><strong>Models/</strong> - Berisi model-model aplikasi (User, Painting, Comment, Like, Follow)</li>
+                <li><strong>Policies/</strong> - Berisi policy untuk otorisasi</li>
+            </ul>
+        </li>
+        <li><strong>database/</strong>
+            <ul>
+                <li><strong>migrations/</strong> - Berisi file migrasi untuk struktur database</li>
+                <li><strong>seeders/</strong> - Berisi seeder untuk data awal aplikasi</li>
+            </ul>
+        </li>
+        <li><strong>public/</strong>
+            <ul>
+                <li><strong>images/</strong> - Berisi gambar statis seperti logo</li>
+                <li><strong>screenshots/</strong> - Berisi screenshot aplikasi untuk dokumentasi</li>
+            </ul>
+        </li>
+        <li><strong>resources/</strong>
+            <ul>
+                <li><strong>views/</strong>
+                    <ul>
+                        <li><strong>admin/</strong> - Berisi view untuk panel admin</li>
+                        <li><strong>auth/</strong> - Berisi view untuk autentikasi</li>
+                        <li><strong>paintings/</strong> - Berisi view untuk CRUD lukisan</li>
+                        <li><strong>profile/</strong> - Berisi view untuk manajemen profil</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>routes/</strong>
+            <ul>
+                <li><strong>web.php</strong> - Berisi definisi route web aplikasi</li>
+            </ul>
+        </li>
+        <li><strong>storage/</strong>
+            <ul>
+                <li><strong>app/public/</strong> - Berisi file yang diupload pengguna (gambar lukisan, foto profil)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h4>Alur Login hingga ke Dashboard</h4>
+
+    <ol>
+        <li><strong>Proses Login</strong>:
+            <ul>
+                <li>Pengguna mengakses halaman login melalui URL <code>/login</code></li>
+                <li>Pengguna memasukkan email dan password</li>
+                <li>Sistem memvalidasi kredensial pengguna</li>
+                <li>Jika valid, pengguna diarahkan ke halaman beranda (/)</li>
+                <li>Jika pengguna adalah admin, mereka dapat mengakses dashboard admin melalui menu dropdown</li>
+            </ul>
+        </li>
+        <li><strong>Proses Register</strong>:
+            <ul>
+                <li>Pengguna mengakses halaman register melalui URL <code>/register</code></li>
+                <li>Pengguna mengisi form registrasi (nama, email, password)</li>
+                <li>Sistem memvalidasi input dan membuat akun baru</li>
+                <li>Pengguna diarahkan ke halaman beranda sebagai pengguna yang sudah login</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h4>Alur CRUD: Bagaimana User Dapat Menambahkan, Mengedit, dan Menghapus Data</h4>
+
+    <ol>
+        <li><strong>Create (Menambahkan Data)</strong>:
+            <ul>
+                <li>Pengguna yang sudah login mengklik tombol "Upload Karya" di navbar</li>
+                <li>Sistem menampilkan form tambah lukisan</li>
+                <li>Pengguna mengisi judul, deskripsi, dan mengunggah gambar</li>
+                <li>Pengguna mengklik tombol "Simpan"</li>
+                <li>Sistem memvalidasi input dan menyimpan data</li>
+                <li>Pengguna diarahkan ke halaman beranda dengan pesan sukses</li>
+            </ul>
+        </li>
+        <li><strong>Read (Membaca Data)</strong>:
+            <ul>
+                <li>Semua pengguna dapat melihat daftar lukisan di halaman beranda</li>
+                <li>Pengguna dapat mengklik lukisan untuk melihat detail</li>
+                <li>Sistem menampilkan halaman detail lukisan dengan informasi lengkap</li>
+            </ul>
+        </li>
+        <li><strong>Update (Mengedit Data)</strong>:
+            <ul>
+                <li>Pemilik lukisan dapat mengklik tombol "Edit" di halaman detail lukisan</li>
+                <li>Sistem menampilkan form edit dengan data yang sudah ada</li>
+                <li>Pengguna mengubah data yang diinginkan</li>
+                <li>Pengguna mengklik tombol "Update"</li>
+                <li>Sistem memvalidasi input dan memperbarui data</li>
+                <li>Pengguna diarahkan kembali ke halaman detail dengan pesan sukses</li>
+            </ul>
+        </li>
+        <li><strong>Delete (Menghapus Data)</strong>:
+            <ul>
+                <li>Pemilik lukisan dapat mengklik tombol "Hapus" di halaman detail lukisan</li>
+                <li>Sistem menampilkan konfirmasi penghapusan</li>
+                <li>Jika pengguna mengkonfirmasi, data dihapus</li>
+                <li>Pengguna diarahkan ke halaman beranda dengan pesan sukses</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h3>2. Screenshot Aplikasi Berjalan</h3>
+
+    <h4>Form Login dan Dashboard</h4>
+    <img src="public/screenshots/login.PNG" alt="Form Login">
+    <img src="public/screenshots/admin.PNG" alt="Dashboard Admin">
+
+    <h4>Form Tambah/Edit Data</h4>
+    <img src="public/screenshots/crud_create.PNG" alt="Form Tambah Data">
+    <img src="public/screenshots/crud_edit.PNG" alt="Form Edit Data">
+
+    <h4>Tabel Data</h4>
+    <img src="public/screenshots/crud_list.PNG" alt="Tabel Data">
+    <img src="public/screenshots/detail.PNG" alt="Detail Data">
+
+    <h2>Kesimpulan</h2>
+
+    <p>Proyek Laravel Romyverse telah berhasil mengimplementasikan semua fitur minimal yang dipersyaratkan, yaitu sistem autentikasi (login dan register) dan operasi CRUD untuk entitas lukisan. Selain itu, proyek ini juga mengimplementasikan fitur tambahan seperti sistem like, komentar, follow, dan panel admin untuk meningkatkan fungsionalitas dan pengalaman pengguna.</p>
+
+    <p>Struktur proyek mengikuti standar Laravel dengan organisasi file yang rapi dan terstruktur. Validasi form diterapkan dengan baik di sisi server untuk memastikan integritas data. Alur pengguna dari login hingga melakukan operasi CRUD juga dirancang dengan intuitif dan user-friendly.</p>
+
+    <p>Dengan desain antarmuka yang menarik menggunakan layout Pinterest-style, Romyverse menawarkan platform yang menarik bagi seniman untuk memamerkan karya mereka dan bagi penggemar seni untuk menjelajahi dan berinteraksi dengan karya-karya tersebut.</p>
+</body>
+</html> 
