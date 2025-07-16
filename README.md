@@ -118,6 +118,20 @@ Romyverse adalah platform berbagi dan eksplorasi karya seni digital berbasis web
 ### Panel Admin
 ![Panel Admin](public/screenshots/admin.PNG)
 
+### Operasi CRUD
+
+#### Create (Tambah Data)
+![Create Data](public/screenshots/create.PNG)
+
+#### Read (Baca Data)
+![Read Data](public/screenshots/read.PNG)
+
+#### Update (Edit Data)
+![Update Data](public/screenshots/update.PNG)
+
+#### Delete (Hapus Data)
+![Delete Data](public/screenshots/delete.PNG)
+
 ## 🌟 Fitur Mendatang
 
 Berikut adalah rencana pengembangan fitur Romyverse di masa mendatang:
