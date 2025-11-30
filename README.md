@@ -125,28 +125,44 @@ Romyverse dirancang dengan fokus utama pada pengalaman pengguna yang estetis dan
 ### Halaman Beranda
 ![Halaman Beranda](public/screenshots/home.PNG)
 
+*Desain beranda menyambut pengguna dengan carousel hero yang imersif, diikuti oleh grid masonry yang responsif. Tata letak ini memaksimalkan ruang layar dan memberikan pengalaman eksplorasi visual yang mengalir tanpa henti, memudahkan pengguna menemukan inspirasi baru setiap saat.*
+
 ### Halaman Detail Karya
 ![Detail Karya](public/screenshots/detail.PNG)
+
+*Halaman detail dirancang untuk fokus sepenuhnya pada karya seni dengan tampilan gambar yang besar dan jelas tanpa gangguan. Informasi pendukung disajikan dengan rapi, dilengkapi dengan fitur interaktif seperti komentar dan like yang ditempatkan secara strategis untuk mendorong keterlibatan komunitas.*
 
 ### Halaman Profil
 ![Profil User](public/screenshots/profile.PNG)
 
+*Halaman profil memberikan identitas visual yang kuat bagi setiap seniman. Foto profil dan bio ditampilkan dengan elegan di bagian atas, diikuti oleh koleksi karya pengguna yang tertata rapi, memudahkan pengunjung untuk memahami persona dan gaya artistik seniman dalam sekilas pandang.*
+
 ### Panel Admin
 ![Panel Admin](public/screenshots/admin.PNG)
+
+*Dashboard admin mengutamakan kejelasan data dan efisiensi navigasi. Statistik kunci ditampilkan dalam kartu ringkasan yang kontras dan mudah dibaca, sementara tabel manajemen data dirancang bersih dengan tombol aksi yang jelas untuk pengelolaan pengguna dan konten yang cepat.*
 
 ### Operasi CRUD
 
 #### Create (Tambah Data)
 ![Create Data](public/screenshots/create.PNG)
 
+*Formulir penambahan data dirancang dengan layout yang bersih dan label yang jelas. Validasi input real-time dan feedback visual membantu pengguna mengisi data dengan benar dan cepat, meminimalkan friksi dalam proses berbagi karya.*
+
 #### Read (Baca Data)
 ![Read Data](public/screenshots/read.PNG)
+
+*Tampilan data disajikan dalam format yang mudah dipindai oleh mata. Penggunaan whitespace yang cukup dan tipografi yang hierarkis memastikan informasi penting dapat ditangkap dengan cepat oleh pengguna tanpa merasa kewalahan.*
 
 #### Update (Edit Data)
 ![Update Data](public/screenshots/update.PNG)
 
+*Proses pengeditan data mempertahankan konsistensi visual dengan formulir pembuatan, sehingga pengguna tidak perlu mempelajari antarmuka baru. Data yang ada diisi otomatis (pre-filled) untuk mempercepat proses revisi.*
+
 #### Delete (Hapus Data)
 ![Delete Data](public/screenshots/delete.PNG)
+
+*Mekanisme penghapusan dilengkapi dengan konfirmasi yang jelas untuk mencegah tindakan yang tidak disengaja. Feedback visual instan diberikan setelah aksi selesai, memberikan kepastian status sistem kepada pengguna.*
 
 ## 🌟 Fitur Mendatang
 
